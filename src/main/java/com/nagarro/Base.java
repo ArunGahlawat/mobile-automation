@@ -3,10 +3,8 @@ package com.nagarro;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.StartsActivity;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.apache.commons.configuration2.Configuration;
-import org.openqa.selenium.Platform;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.Common;
@@ -18,16 +16,15 @@ import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 public class Base {
-	public AppiumDriver<MobileElement> driver;
-	public WebDriverWait wait;
+	public static AppiumDriver<MobileElement> driver;
+	public static WebDriverWait wait;
 	public Configuration commonConfig = Common.getConfig(Config.COMMON);
 	public Configuration anndroidConfig = Common.getConfig(Config.ANDROID);
 
 	public void loadDriver(){
 		File classpathRoot = new File(System.getProperty("user.dir"));
-
-		File appDir = new File(classpathRoot, commonConfig.getString("APK_DIR"));
-		File app = new File(appDir, commonConfig.getString("APK_NAME"));
+		File appDir = new File(classpathRoot, anndroidConfig.getString("APK_DIR"));
+		File app = new File(appDir, anndroidConfig.getString("APK_NAME"));
 		DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
 		desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_NAME,commonConfig.getString("PLATFORM_NAME"));
 		desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION,commonConfig.getString("PLATFORM_VERSION"));
@@ -50,11 +47,12 @@ public class Base {
 
 	public void tearDown() {
 		try {
-			Thread.sleep(5000);
-			driver.quit();
-		} catch (InterruptedException e) {
+			if (driver != null) {
+				driver.removeApp(anndroidConfig.getString("APP_PACKAGE"));
+				driver.quit();
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
 }

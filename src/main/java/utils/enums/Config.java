@@ -2,7 +2,6 @@ package utils.enums;
 
 public enum Config {
 	COMMON("common"),
-	CREDS("credentials"),
 	ANDROID("android");
 
 	String config;

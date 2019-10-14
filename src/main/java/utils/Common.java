@@ -8,6 +8,7 @@ import org.apache.commons.configuration2.builder.FileBasedConfigurationBuilder;
 import org.apache.commons.configuration2.builder.fluent.Parameters;
 import org.apache.commons.configuration2.ex.ConfigurationException;
 
+import java.io.File;
 import java.util.HashMap;
 
 import static utils.enums.Config.*;
@@ -44,5 +45,11 @@ public class Common {
 			cex.printStackTrace();
 		}
 		return config;
+	}
+
+	public static File loadExtentConfig() {
+		File classpathRoot = new File(System.getProperty("user.dir"));
+		File resourceDir = new File(classpathRoot, getConfig(COMMON).getString("REPORT_CONFIG_PATH"));
+		return new File(resourceDir, getConfig(COMMON).getString("REPORT_FILE_NAME"));
 	}
 }
