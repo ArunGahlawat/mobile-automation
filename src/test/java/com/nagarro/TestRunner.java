@@ -1,3 +1,5 @@
+package com.nagarro;
+
 import com.nagarro.Base;
 import com.vimalselvam.cucumber.listener.Reporter;
 import cucumber.api.CucumberOptions;
@@ -8,7 +10,7 @@ import utils.Common;
 
 @CucumberOptions(
 		features = "src/test/resources/features",
-		glue = {"stepDefinitions"},
+		glue = {"com/nagarro/stepDefinitions","com/nagarro/hooks"},
 		tags = {"~@Ignore"},
 		plugin = {
 				"pretty",

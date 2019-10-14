@@ -1,3 +1,5 @@
+package com.nagarro.hooks;
+
 import com.nagarro.Base;
 import com.vimalselvam.cucumber.listener.Reporter;
 import cucumber.api.Scenario;
@@ -6,6 +8,7 @@ import cucumber.api.java.Before;
 import com.google.common.io.Files;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+
 import java.io.File;
 import java.io.IOException;
 

@@ -1,8 +1,7 @@
-package stepDefinitions;
+package com.nagarro.stepDefinitions;
 
 import com.nagarro.Base;
 import com.nagarro.locators.SignupLocators;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
