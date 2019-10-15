@@ -3,13 +3,8 @@ package utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintStream;
-
 public class Log {
-	public static final Logger LOGGER = LoggerFactory.getLogger(Log.class);
-	private static PrintStream myPrintStream;
+	private static final Logger LOGGER = LoggerFactory.getLogger(Log.class);
 
 	/**
 	 * method to display information in console logs only
@@ -42,37 +37,5 @@ public class Log {
 		LOGGER.error("==========================================================");
 		LOGGER.error("Exception : " + exception);
 		LOGGER.error("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-	}
-
-	/**
-	 * @return printStream
-	 */
-	public static PrintStream getPrintStream()
-	{
-		if ( myPrintStream == null )
-		{
-			OutputStream output = new OutputStream()
-			{
-				private StringBuilder myStringBuilder = new StringBuilder();
-
-				@Override
-				public void write(int b) throws IOException
-				{
-					this.myStringBuilder.append((char) b );
-				}
-
-				/**
-				 * @see OutputStream#flush()
-				 */
-				@Override
-				public void flush()
-				{
-					debug( this.myStringBuilder.toString() );
-					myStringBuilder = new StringBuilder();
-				}
-			};
-			myPrintStream = new PrintStream( output, true );  // true: autoflush must be set!
-		}
-		return myPrintStream;
 	}
 }

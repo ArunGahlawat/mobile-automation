@@ -1,16 +1,18 @@
 package com.nagarro;
 
-import com.nagarro.Base;
 import com.vimalselvam.cucumber.listener.Reporter;
 import cucumber.api.CucumberOptions;
-import cucumber.api.testng.TestNGCucumberRunner;
 import cucumber.api.testng.CucumberFeatureWrapper;
-import org.testng.annotations.*;
+import cucumber.api.testng.TestNGCucumberRunner;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 import utils.Common;
 
 @CucumberOptions(
 		features = "src/test/resources/features",
-		glue = {"com/nagarro/stepDefinitions","com/nagarro/hooks"},
+		glue = {"com/nagarro/stepDefinitions", "com/nagarro/hooks"},
 		tags = {"~@Ignore"},
 		plugin = {
 				"pretty",
@@ -24,7 +26,7 @@ public class TestRunner extends Base {
 	private TestNGCucumberRunner testNGCucumberRunner;
 
 	@BeforeClass(alwaysRun = true)
-	public void setUpClass() throws Exception {
+	public void setUpClass(){
 		testNGCucumberRunner = new TestNGCucumberRunner(this.getClass());
 	}
 
@@ -39,7 +41,7 @@ public class TestRunner extends Base {
 	}
 
 	@AfterClass(alwaysRun = true)
-	public void tearDownClass() throws Exception {
+	public void tearDownClass() {
 		Reporter.loadXMLConfig(Common.loadExtentConfig());
 		testNGCucumberRunner.finish();
 	}

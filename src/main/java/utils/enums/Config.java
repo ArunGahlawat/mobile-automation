@@ -2,9 +2,11 @@ package utils.enums;
 
 public enum Config {
 	COMMON("common"),
-	ANDROID("android");
+	ANDROID("android")
+	;
 
 	String config;
+
 	Config(String config) {
 		this.config = config;
 	}

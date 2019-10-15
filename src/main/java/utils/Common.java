@@ -1,20 +1,20 @@
 package utils;
 
-import utils.enums.Config;
 import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.configuration2.FileBasedConfiguration;
 import org.apache.commons.configuration2.PropertiesConfiguration;
 import org.apache.commons.configuration2.builder.FileBasedConfigurationBuilder;
 import org.apache.commons.configuration2.builder.fluent.Parameters;
 import org.apache.commons.configuration2.ex.ConfigurationException;
+import utils.enums.Config;
 
 import java.io.File;
 import java.util.HashMap;
 
-import static utils.enums.Config.*;
+import static utils.enums.Config.COMMON;
 
 public class Common {
-	public static HashMap<Config, Object> CONFIGS = new HashMap<>();
+	private static HashMap<Config, Object> CONFIGS = new HashMap<>();
 
 	public static Configuration getConfig(Config config) {
 		if (!CONFIGS.containsKey(config) || CONFIGS.get(config) == null) {
@@ -32,7 +32,7 @@ public class Common {
 		}
 	}
 
-	public static Configuration loadResources(String propertiesFile) {
+	private static Configuration loadResources(String propertiesFile) {
 		Parameters params = new Parameters();
 		propertiesFile = propertiesFile + ".properties";
 		FileBasedConfigurationBuilder<FileBasedConfiguration> builder =
